@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background: #fafafa;
+    color: #333;
+}
+
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h1, h2 {
+    font-weight: 600;
+}
+
+hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+/* ------------------------------------------------------------
+   SIDE-BY-SIDE LAYOUT — ALWAYS EQUAL WIDTH
+------------------------------------------------------------ */
+#plot-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.plot-column {
+    flex: 1 1 0;     /* 50% width each, enforced */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ------------------------------------------------------------
+   PLOTS
+------------------------------------------------------------ */
+.plot {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+/* ------------------------------------------------------------
+   UMAP Control Panel
+------------------------------------------------------------ */
+#umap-panel {
+    border: 1px solid #ccc;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.05);
+}
+
+#umap-panel h3 {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+.control-block {
+    margin-bottom: 18px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.value-label {
+    font-weight: bold;
+    color: #555;
+    padding-left: 6px;
+}

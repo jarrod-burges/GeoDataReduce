@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>UMAP Exploration In Petrology</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+<main>
+
+    <h1>UMAP Exploration In Petrology</h1>
+
+    <p>
+        QAPF (left) and UMAP (right) are linked. Hovering highlights corresponding points.
+        UMAP controls are placed directly below the UMAP plot in its own column.
+    </p>
+
+    <hr>
+
+    <div id="plot-row">
+
+        <!-- Left column: QAPF -->
+        <div class="plot-column">
+            <div id="qap_plot" class="plot"></div>
+        </div>
+
+        <!-- Right column: UMAP + controls -->
+        <div class="plot-column">
+            <div id="umap_plot" class="plot"></div>
+
+            <div id="umap-panel">
+                <h3>UMAP Controls</h3>
+
+                <div class="control-block">
+                    <label>n_neighbors:
+                        <span id="nn_val" class="value-label">–</span>
+                    </label>
+                    <input type="range" id="n_neighbors">
+                </div>
+
+                <div class="control-block">
+                    <label>min_dist:
+                        <span id="md_val" class="value-label">–</span>
+                    </label>
+                    <input type="range" id="min_dist">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
