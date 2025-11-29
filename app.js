@@ -53,23 +53,35 @@ function extractValues() {
     MD_VALUES = [...mdSet].sort((a, b) => a - b);
 }
 
-/* ================================================================
-   3. Sliders
-================================================================== */
 function configureSliders() {
+
+    // --- choose your preferred defaults ---
+    const DEFAULT_NN = 50;       // or any available value
+    const DEFAULT_MD = 0.10;     // must match your MD_VALUES exactly or to 2 decimals
+
+    // Find the closest index in the list
+    const nnIndex = NN_VALUES.indexOf(DEFAULT_NN);
+    const mdIndex = MD_VALUES.indexOf(DEFAULT_MD);
+
+    // Fallback if not found
+    const nnIdx = nnIndex >= 0 ? nnIndex : 0;
+    const mdIdx = mdIndex >= 0 ? mdIndex : 0;
+
     const nnSlider = document.getElementById("n_neighbors");
     nnSlider.min = 0;
     nnSlider.max = NN_VALUES.length - 1;
     nnSlider.step = 1;
-    nnSlider.value = 0;
-    document.getElementById("nn_val").innerText = NN_VALUES[0];
+    nnSlider.value = nnIdx;   // 🔥 preset
+
+    document.getElementById("nn_val").innerText = NN_VALUES[nnIdx];
 
     const mdSlider = document.getElementById("min_dist");
     mdSlider.min = 0;
     mdSlider.max = MD_VALUES.length - 1;
     mdSlider.step = 1;
-    mdSlider.value = 0;
-    document.getElementById("md_val").innerText = MD_VALUES[0].toFixed(2);
+    mdSlider.value = mdIdx;   // 🔥 preset
+
+    document.getElementById("md_val").innerText = MD_VALUES[mdIdx].toFixed(2);
 }
 
 function getKey() {

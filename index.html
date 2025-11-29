@@ -6,6 +6,45 @@
 
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        /* --- NEW STYLES FOR UMAP GROUP BOX --- */
+        .umap-box {
+            border: 1px solid #ccc;
+            padding: 8px 10px;     /* reduced padding */
+            border-radius: 6px;
+            background: #fafafa;
+            margin-top: 8px;
+        }
+
+        .umap-box h3 {
+            margin-top: 4px;       /* tighter top margin */
+            margin-bottom: 6px;    /* reduced spacing below */
+            font-size: 1.05em;
+        }
+
+        /* --- slider blocks tightened --- */
+        .control-block {
+            margin: 4px 0;         /* smaller vertical spacing */
+            padding: 0;            /* remove internal padding */
+        }
+
+        .control-block label {
+            display: block;        /* puts label above slider cleanly */
+            margin-bottom: 2px;    /* reduced spacing */
+            font-size: 0.92em;
+        }
+
+        .control-block input[type="range"] {
+            width: 100%;
+            margin: 0;             /* remove extra vertical whitespace */
+        }
+
+        .value-label {
+            font-weight: bold;
+            margin-left: 4px;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,25 +53,33 @@
     <h1>UMAP Exploration In Petrology</h1>
 
     <p>
+        This article is intended to explore the use of UMAP for visualizing geochemical data in petrology. This example
+        will build on the UMAP article found here https://pair-code.github.io/understanding-umap/. Here we add a geological
+        context to the algorithms to better understand how dimension reduction algorithms can be used and understood.
+    </p>
+
+    <p>
+        Here we use the Quartz-Alkali Feldspar-Plagioclase (QAP) diagram with randomized data points of varying composition to
+        show how UMAP reduces the dimensions and preserves the relationships in the original dataset. Using some
+        parameters will result in a near identical mapping to the QAP diagram, showing that UMAP can preserve the relationships.
+    </p>
+
+    <p>
         QAPF (left) and UMAP (right) are linked. Hovering highlights corresponding points.
-        UMAP controls are placed directly below the UMAP plot in its own column.
+        Controls for UMAP are integrated into a single panel.
     </p>
 
     <hr>
 
     <div id="plot-row">
-
-        <!-- Left column: QAPF -->
         <div class="plot-column">
             <div id="qap_plot" class="plot"></div>
         </div>
 
-        <!-- Right column: UMAP + controls -->
         <div class="plot-column">
-            <div id="umap_plot" class="plot"></div>
+            <div class="umap-box">
 
-            <div id="umap-panel">
-                <h3>UMAP Controls</h3>
+                <div id="umap_plot" class="plot"></div>
 
                 <div class="control-block">
                     <label>n_neighbors:
@@ -50,11 +97,22 @@
 
             </div>
         </div>
-
     </div>
+
+    <p>
+        To understand UMAP and other dimension reduction algorithms we must first understand the relationships in the QAP diagram.
+        Using QAP we know that granite and tonalite samples do not share a common boundary, but they both share boundaries with
+        granodiorite. Increasing n_neighbors to a higher values (e.g., 50+) will result in UMAP preserving this relationship,
+        while lower values (e.g., 5) will not, also showing how parameter choices impact the results.
+    </p>
+    <p>
+        So the granite points will be next to and closer to granodiorite points, but will never be next to or closer to tonalite points.
+    </p>
+
 
 </main>
 
 <script src="app.js"></script>
 </body>
 </html>
+
