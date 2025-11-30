@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>UMAP Exploration In Petrology</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Petrology in UMAP</title>
+
+    <meta property="og:title" content="Petrology in UMAP">
+    <meta property="og:description" content="Understanding UMAP through geological petrology data concepts.">
+    <meta property="og:url" content="https://jarrodburges.com/understanding-umap-petrology/">
+    <meta property="og:image" content="">
+
+    <link rel="icon" type="image/png" href="favicon.png" />
 
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <style>
-        /* --- NEW STYLES FOR UMAP GROUP BOX --- */
         .umap-box {
-            border: 1px solid #ccc;
-            padding: 8px 10px;     /* reduced padding */
-            border-radius: 6px;
-            background: #fafafa;
-            margin-top: 8px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .umap-box h3 {
@@ -44,6 +50,24 @@
             font-weight: bold;
             margin-left: 4px;
         }
+
+        .plot {
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow: hidden;
+        }
+
+        .plot-row {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-top: 20px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+
+
     </style>
 </head>
 
@@ -54,8 +78,10 @@
 
     <p>
         This article is intended to explore the use of UMAP for visualizing geochemical data in petrology. This example
-        will build on the UMAP article found here https://pair-code.github.io/understanding-umap/. Here we add a geological
-        context to the algorithms to better understand how dimension reduction algorithms can be used and understood.
+        will build on the <a href="https://pair-code.github.io/understanding-umap/">UMAP article</a>, which does
+        an excellent job at explaining dimension reduction, UMAP, t-SNE, and the differences between them.
+        Here we add a geological context to the algorithms to better understand how dimension
+        reduction algorithms can be used and understood.
     </p>
 
     <p>
@@ -69,16 +95,18 @@
         Controls for UMAP are integrated into a single panel.
     </p>
 
-    <hr>
+    <p>
+        Due to limitations in plotly.js we cannot show proper QAPF diagrams with dual-ternary plots, but can for QAP.
+        Therefore, we opted to show both without so both look visually the same.
+    </p>
 
-    <div id="plot-row">
+    <div class="plot-row">
         <div class="plot-column">
             <div id="qap_plot" class="plot"></div>
         </div>
 
         <div class="plot-column">
             <div class="umap-box">
-
                 <div id="umap_plot" class="plot"></div>
 
                 <div class="control-block">
@@ -94,11 +122,9 @@
                     </label>
                     <input type="range" id="min_dist">
                 </div>
-
             </div>
         </div>
     </div>
-
     <p>
         To understand UMAP and other dimension reduction algorithms we must first understand the relationships in the QAP diagram.
         Using QAP we know that granite and tonalite samples do not share a common boundary, but they both share boundaries with
@@ -106,13 +132,35 @@
         while lower values (e.g., 5) will not, also showing how parameter choices impact the results.
     </p>
     <p>
-        So the granite points will be next to and closer to granodiorite points, but will never be next to or closer to tonalite points.
+        Therefore, the granite points will be next to and closer to granodiorite points, but will never be next to or closer to tonalite points.
+        UMAP projections preserve the relative distances between points, but not the original high n-dimensional topology.
+        Since our projections are fairly low complexity with high n_neighbors and high min_dist, we can see that
+        UMAP almost recreates the original data, visually but also rotated and squished. This is not always the case,
+        but it demonstrates that the relative relationships are preserved, and will be regardless of data complexity.
     </p>
 
+    <h3>UMAP with QAP and Intrusive/Extrusive </h3>
+    <p>
+        Here we explore UMAP with QAPF data, with an added in a binary intrusive/extrusive label. With higher parameter
+        values we can see that UMAP clusters out these two groups, and preserves the QAPF relationships within each group.
+        This shows that UMAP can also preserve categorical relationships in addition to numerical relationships.
+    </p>
+    <div class="plot-row">
+        <div class="plot-column">
+            <div id="qap_plot_intext" class="plot"></div>
+        </div>
+    </div>
+
+    <h4>Acknowledgements</h4>
+    <p>
+        Thanks to the original <a href="https://pair-code.github.io/understanding-umap/">UMAP article authors</a> for their excellent work and explanations.
+        You can find the original code for this article on <a href="http://www.github.com/jarrodburges/understanding-umap-petrology">GitHub</a>.
+        You can view my website at <a href="http://www.jarrodburges.com">jarrodburges.com</a>.
+    </p>
 
 </main>
 
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
-</html>
 
+</html>
