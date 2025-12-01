@@ -94,6 +94,15 @@ const metamorphic_comp_plot = new SinglePlot({
     isUMAP: true
 });
 
+const sedimentary_plot = new SinglePlot({
+    elementId: "sedimentary_plot",
+    json: "sedimentary_umap.json",
+    coordsKey: "embedding",
+    colorKey: "rocktype",
+    title: "Sedimentary - Dott (1964) UMAP Projection",
+    isUMAP: true
+});
+
 (async () => {
 
     await extractUMAPSliderValues();
@@ -113,4 +122,5 @@ const metamorphic_comp_plot = new SinglePlot({
     await qap_plot_intext.load();
     await metamorphic_plot.load();
     await metamorphic_comp_plot.load();
+    await sedimentary_plot.load();
 })();
